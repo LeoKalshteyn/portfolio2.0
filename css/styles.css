@@ -3859,7 +3859,7 @@ input[type="button"].btn--primary:focus {
         padding-top: var(--vspace-5);
     }
     .s-about__pic {
-        display: none;
+        /* display: none; */
     }
 }
 
@@ -4236,7 +4236,7 @@ input[type="button"].btn--primary:focus {
     bottom: 0;
     width: 100%;
     height: 100%;
-    background-image: url(../images/testimonials-bg-3000.jpg);
+    background-image: url(../images/blog-bg.jpg);
     background-repeat: no-repeat;
     background-position: center;
     background-size: cover;

@@ -7,9 +7,6 @@
 
     "use strict";
 
-    // GitHubCalendar(".calendar", "gorgutzz", { responsive: true });
-    // GitHubActivity.feed({ username: 'gorgutzz', selector: '#feed', limit: 5  });
-
     const rss = new RSS(
         document.querySelector(".swiper-wrapper"),
         //Change this to your own rss feeds
