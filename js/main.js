@@ -6,7 +6,40 @@
 (function(html) {
 
     "use strict";
-    
+
+    // GitHubCalendar(".calendar", "gorgutzz", { responsive: true });
+    // GitHubActivity.feed({ username: 'gorgutzz', selector: '#feed', limit: 5  });
+
+    const rss = new RSS(
+        document.querySelector(".swiper-wrapper"),
+        //Change this to your own rss feeds
+          "https://dev.to/feed/gorgutzz",
+        {
+           // how many entries do you want?
+          // default: 4
+          // valid values: any integer
+          limit: 8,
+
+
+          // will request the API via https
+        // default: false
+        // valid values: false, true
+        ssl: true,
+
+         // outer template for the html transformation
+        // default: "<ul>{entries}</ul>"
+        // valid values: any string
+        layoutTemplate: `{entries}`,
+
+        // inner template for each entry
+        // default: '<li><a href="{url}">[{author}@{date}] {title}</a><br/>{shortBodyPlain}</li>'
+        // valid values: any string
+        entryTemplate: '<div class="testimonial-slider__slide swiper-slide"><div class="testimonial-slider__author"><img src="images/icons/dev-black.png" alt="Dev.to" class="testimonial-slider__avatar"><cite class="testimonial-slider__cite"><strong><a href="{url}" target="_blank">{title}</a></strong></cite></div><p>{shortBodyPlain}</p></div>',
+
+        }
+    );
+    rss.render();
+
     html.className = html.className.replace(/\bno-js\b/g, '') + ' js ';
 
 
@@ -18,7 +51,7 @@
         if (!preloader) return;
 
         window.addEventListener('load', function() {
-            
+
             document.querySelector('body').classList.remove('ss-preload');
             document.querySelector('body').classList.add('ss-loaded');
 
@@ -40,7 +73,7 @@
 
    /* Parallax
     * -------------------------------------------------- */
-    const ssParallax = function() { 
+    const ssParallax = function() {
 
         const rellax = new Rellax('.rellax');
 
@@ -64,7 +97,7 @@
         window.addEventListener('scroll', function () {
 
             let loc = window.scrollY;
-           
+
 
             if (loc > triggerHeight) {
                 hdr.classList.add('sticky');
@@ -90,7 +123,7 @@
 
 
    /* Mobile Menu
-    * ---------------------------------------------------- */ 
+    * ---------------------------------------------------- */
     const ssMobileMenu = function() {
 
         const toggleButton = document.querySelector('.s-header__menu-toggle');
@@ -138,21 +171,21 @@
         window.addEventListener("scroll", navHighlight);
 
         function navHighlight() {
-        
+
             // Get current scroll position
             let scrollY = window.pageYOffset;
-        
-            // Loop through sections to get height(including padding and border), 
+
+            // Loop through sections to get height(including padding and border),
             // top and ID values for each
             sections.forEach(function(current) {
                 const sectionHeight = current.offsetHeight;
                 const sectionTop = current.offsetTop - 50;
                 const sectionId = current.getAttribute("id");
-            
-               /* If our current scroll position enters the space where current section 
-                * on screen is, add .current class to parent element(li) of the thecorresponding 
-                * navigation link, else remove it. To know which link is active, we use 
-                * sectionId variable we are getting while looping through sections as 
+
+               /* If our current scroll position enters the space where current section
+                * on screen is, add .current class to parent element(li) of the thecorresponding
+                * navigation link, else remove it. To know which link is active, we use
+                * sectionId variable we are getting while looping through sections as
                 * an selector
                 */
                 if (scrollY > sectionTop && scrollY <= sectionTop + sectionHeight) {
@@ -167,7 +200,7 @@
 
 
    /* Swiper
-    * ------------------------------------------------------ */ 
+    * ------------------------------------------------------ */
     const ssSwiper = function() {
 
         const mySwiper = new Swiper('.swiper-container', {
@@ -176,7 +209,7 @@
             pagination: {
                 el: '.swiper-pagination',
                 clickable: true,
-            },          
+            },
             breakpoints: {
                 // when window width is >= 401px
                 401: {
@@ -235,7 +268,7 @@
     const ssAlertBoxes = function() {
 
         const boxes = document.querySelectorAll('.alert-box');
-  
+
         boxes.forEach(function(box) {
 
             box.addEventListener('click', function(e){
@@ -246,7 +279,7 @@
                     setTimeout(function() {
                         box.style.display = "none";
                     }, 500)
-                }    
+                }
             });
 
         })
@@ -257,7 +290,7 @@
    /* Smoothscroll
     * ------------------------------------------------------ */
     const ssSmoothScroll = function () {
-        
+
         const triggers = document.querySelectorAll(".smoothscroll");
 
         triggers.forEach(function(trigger) {
@@ -306,7 +339,7 @@
         ssMoveHeader();
         ssMobileMenu();
         ssScrollSpy();
-        ssSwiper();
+        // ssSwiper();
         ssLightbox();
         ssAlertBoxes();
         ssSmoothScroll();
@@ -315,3 +348,30 @@
     })();
 
 })(document.documentElement);
+
+document.addEventListener('readystatechange', event => {
+
+    // When window loaded ( external resources are loaded too- `css`,`src`, etc...)
+    if (event.target.readyState === "complete") {
+      const mySwiper = new Swiper('.swiper-container', {
+
+          slidesPerView: 1,
+          pagination: {
+              el: '.swiper-pagination',
+              clickable: true,
+          },
+          breakpoints: {
+              // when window width is >= 401px
+              401: {
+                  slidesPerView: 1,
+                  spaceBetween: 20
+              },
+              // when window width is >= 801px
+              801: {
+                  slidesPerView: 2,
+                  spaceBetween: 48
+              }
+          }
+       });
+    }
+});
