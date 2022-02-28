@@ -53,7 +53,7 @@ export default class RSS {
         const feedData = await this._load();
 
         this.feed = feedData.responseData.feed;
-        this.entries = feedData.responseData.feed.entries;
+        this.entries = feedData.responseData.feed.items;
       } catch (e) {
         this.entries = [];
         this.feed = null;
