@@ -22,7 +22,7 @@ export default class RSS {
     this.html = [];
     this.options = {
       ssl: true,
-      host: "api.rss2json.com/v1/api.json",
+      host: "www.feedrapp.info",
       support: true,
       limit: null,
       key: null,
@@ -108,9 +108,9 @@ export default class RSS {
     const apiHost = `${apiProtocol}://${this.options.host}`;
 
     const queryParams = {
-      //support: this.options.support,
-      //version: this.version,
-      rss_url: this.urls.map(u => encodeURIComponent(u)).join(",")
+      support: this.options.support,
+      version: this.version,
+      q: this.urls.map(u => encodeURIComponent(u)).join(",")
     };
 
     // set limit to offsetEnd if offset has been set
