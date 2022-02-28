@@ -23,7 +23,7 @@ export default class RSS {
     this.options = {
       ssl: true,
       host: "www.feedrapp.info",
-      support: true,
+      support: false,
       limit: null,
       key: null,
       layoutTemplate: "<ul>{entries}</ul>",
